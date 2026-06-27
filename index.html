@@ -17,44 +17,44 @@
   @media (prefers-color-scheme:dark){:root{--surface-2:#262624;--surface-1:#242422;--surface-0:#1a1a19;--text-primary:#f3f2ea;--text-secondary:#c3c2b7;--text-muted:#898781;--border:rgba(255,255,255,.14);--bg-accent:#0C447C;--text-accent:#B5D4F4;--border-accent:#378ADD}}
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--surface-0);color:var(--text-primary);max-width:720px;margin:0 auto;padding:1.5rem 1.25rem calc(2rem + env(safe-area-inset-bottom));line-height:1.6;overflow-x:hidden}
-  h1{font-size:23px;font-weight:500;margin:0 0 4px}
-  .intro{font-size:13px;color:var(--text-secondary);margin:0 0 1.5rem}
-  input{font:inherit;font-size:16px;color:var(--text-primary);background:var(--surface-2);border:.5px solid var(--border);border-radius:var(--radius);padding:8px 9px;width:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--surface-0);color:var(--text-primary);max-width:720px;margin:0 auto;padding:1.5rem 1.25rem calc(2rem + env(safe-area-inset-bottom));line-height:1.65;overflow-x:hidden;font-size:18px}
+  h1{font-size:28px;font-weight:500;margin:0 0 4px}
+  .intro{font-size:16px;color:var(--text-secondary);margin:0 0 1.5rem}
+  input{font:inherit;font-size:18px;color:var(--text-primary);background:var(--surface-2);border:.5px solid var(--border);border-radius:var(--radius);padding:10px 11px;width:100%}
   input[type=range]{padding:0;accent-color:#2a78d6;width:auto;height:28px}
   button{font:inherit;background:var(--surface-2);border:.5px solid var(--text-muted);border-radius:var(--radius);color:var(--text-primary);cursor:pointer;-webkit-tap-highlight-color:transparent}
   button:hover{background:var(--surface-1)}
-  .hero{background:var(--bg-accent);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.25rem;font-size:15px;line-height:1.6;color:var(--text-accent)}
+  .hero{background:var(--bg-accent);border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:1.25rem;font-size:18px;line-height:1.65;color:var(--text-accent)}
   .hero b{font-weight:500}
   .mc{background:var(--surface-1);border-radius:var(--radius);padding:.85rem .9rem}
-  .mc .lab{font-size:12px;color:var(--text-secondary);margin:0 0 4px}
-  .mc .val{font-size:21px;font-weight:500;line-height:1.2}
-  .mc .sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+  .mc .lab{font-size:14px;color:var(--text-secondary);margin:0 0 4px}
+  .mc .val{font-size:26px;font-weight:500;line-height:1.2}
+  .mc .sub{font-size:13px;color:var(--text-muted);margin-top:2px}
   .bk{background:var(--surface-2);border:.5px solid var(--border);border-radius:12px;padding:.75rem .85rem;margin-bottom:10px}
   .bk .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
-  .bk .nm{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:500}
-  .bk .desc{font-size:12px;color:var(--text-secondary);margin:3px 0 0}
-  .bk .amt{font-size:12px;color:var(--text-secondary);text-align:right;white-space:nowrap}
+  .bk .nm{display:flex;align-items:center;gap:7px;font-size:17px;font-weight:500}
+  .bk .desc{font-size:14px;color:var(--text-secondary);margin:4px 0 0;line-height:1.5}
+  .bk .amt{font-size:13px;color:var(--text-secondary);text-align:right;white-space:nowrap}
   .bk .ctl{display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap}
   .rk{font-size:10px;padding:2px 7px;border-radius:var(--radius);font-weight:500}
   .gl{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
-  .gl label{display:block;font-size:13px;font-weight:500;margin:0 0 3px}
-  .gl .hlp{font-size:11px;color:var(--text-muted);margin:4px 0 0;line-height:1.4}
-  .pbtn{font-size:12px;padding:6px 12px}
-  .sbtn{font-size:13px;padding:9px 12px;text-align:left;line-height:1.4;font-weight:500}
-  .sbtn span{font-size:11px;color:var(--text-muted);font-weight:400}
+  .gl label{display:block;font-size:16px;font-weight:500;margin:0 0 3px}
+  .gl .hlp{font-size:13px;color:var(--text-muted);margin:5px 0 0;line-height:1.45}
+  .pbtn{font-size:16px;padding:12px 14px;width:100%;text-align:left}
+  .sbtn{font-size:18px;padding:14px 15px;text-align:left;line-height:1.45;font-weight:500}
+  .sbtn span{font-size:14px;color:var(--text-muted);font-weight:400}
   .sbtn.on{border:2px solid var(--border-accent);background:var(--bg-accent);color:var(--text-accent)}
   .sbtn.on span{color:var(--text-accent)}
-  .retw{display:flex;align-items:center;gap:3px;font-size:12px;color:var(--text-secondary)}
-  .retw input{width:54px}
-  .seg{font-size:13px;font-weight:500;margin:0 0 7px}
-  .seg small{font-weight:400;color:var(--text-muted)}
-  .note{font-size:11px;color:var(--text-muted);margin-top:1.5rem;line-height:1.5}
+  .retw{display:flex;align-items:center;gap:4px;font-size:14px;color:var(--text-secondary)}
+  .retw input{width:62px}
+  .seg{font-size:17px;font-weight:500;margin:0 0 9px}
+  .seg small{font-weight:400;color:var(--text-muted);font-size:14px}
+  .note{font-size:13px;color:var(--text-muted);margin-top:1.5rem;line-height:1.55}
   @media(max-width:480px){
     body{padding:1.1rem .9rem calc(1.5rem + env(safe-area-inset-bottom))}
     h1{font-size:20px}
     .hero{font-size:14px;padding:.9rem 1rem}
-    .gl{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .gl{grid-template-columns:1fr;gap:14px}
     .retw{margin-left:auto}
     .bk .ctl input[type=range]{flex:1 1 100%}
   }
@@ -65,15 +65,15 @@
 <p class="intro">Set how careful to be, choose where the money goes, and read a plain-English summary of how much you can safely spend and whether your savings last. Built for a 73-year-old in Botswana; rates reflect mid-2026. Educational only, not financial advice.</p>
 
 <p class="seg">1. How careful do you want to be with the savings? <small>— this sets how much you can safely take</small></p>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:1.25rem">
+<div style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:1.25rem">
   <button class="sbtn on" data-strat="real">Protect its value<br><span>savings keep the same buying power · lowest income</span></button>
   <button class="sbtn" data-strat="nominal">Keep the cash amount<br><span>the pula total never drops · more income</span></button>
   <button class="sbtn" data-strat="free">Just spend what I need<br><span>take the full amount · may run out</span></button>
 </div>
 
 <p class="seg">2. Where is the money invested? <small>— drag a slider to move money; safe on top, riskier below</small></p>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.9rem">
-  <span style="font-size:12px;color:var(--text-secondary);align-self:center">Quick mixes:</span>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:.9rem">
+  <span style="font-size:14px;color:var(--text-secondary)">Quick mixes:</span>
   <button class="pbtn" data-preset="stable">Safest</button>
   <button class="pbtn" data-preset="balanced">Balanced</button>
   <button class="pbtn" data-preset="growth">More growth</button>
