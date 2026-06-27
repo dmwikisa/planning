@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Retirement income planner</title>
+<meta name="description" content="A simple, interactive retirement plan: choose how careful to be with your savings, split your money from safe to riskier options, and see in plain words how much you can safely spend and whether your savings last.">
+<meta name="theme-color" content="#1a1a19">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Retirement income planner">
+<meta property="og:description" content="See how much you can safely spend each month and whether your savings hold their value.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232a78d6'/%3E%3Cpath d='M6 22 L13 15 L18 19 L26 10' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root{--surface-2:#ffffff;--surface-1:#f5f4ef;--surface-0:#faf9f5;--text-primary:#1a1a18;--text-secondary:#52514e;--text-muted:#898781;--border:rgba(11,11,11,.12);--bg-accent:#E6F1FB;--text-accent:#185FA5;--border-accent:#378ADD;--radius:8px}
+  @media (prefers-color-scheme:dark){:root{--surface-2:#262624;--surface-1:#242422;--surface-0:#1a1a19;--text-primary:#f3f2ea;--text-secondary:#c3c2b7;--text-muted:#898781;--border:rgba(255,255,255,.14);--bg-accent:#0C447C;--text-accent:#B5D4F4;--border-accent:#378ADD}}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--surface-0);color:var(--text-primary);max-width:720px;margin:0 auto;padding:1.5rem 1.25rem calc(2rem + env(safe-area-inset-bottom));line-height:1.6}
+  h1{font-size:23px;font-weight:500;margin:0 0 4px}
+  .intro{font-size:13px;color:var(--text-secondary);margin:0 0 1.5rem}
+  input{font:inherit;color:var(--text-primary);background:var(--surface-2);border:.5px solid var(--border);border-radius:var(--radius);padding:6px 8px;width:100%}
+  input[type=range]{padding:0;accent-color:#2a78d6;width:auto}
+  button{font:inherit;background:var(--surface-2);border:.5px solid var(--text-muted);border-radius:var(--radius);color:var(--text-primary);cursor:pointer;-webkit-tap-highlight-color:transparent}
+  button:hover{background:var(--surface-1)}
+  .hero{background:var(--bg-accent);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.25rem;font-size:15px;line-height:1.6;color:var(--text-accent)}
+  .hero b{font-weight:500}
+  .mc{background:var(--surface-1);border-radius:var(--radius);padding:.85rem .9rem}
+  .mc .lab{font-size:12px;color:var(--text-secondary);margin:0 0 4px}
+  .mc .val{font-size:21px;font-weight:500;line-height:1.2}
+  .mc .sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+  .bk{background:var(--surface-2);border:.5px solid var(--border);border-radius:12px;padding:.75rem .85rem;margin-bottom:10px}
+  .bk .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .bk .nm{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:500}
+  .bk .desc{font-size:12px;color:var(--text-secondary);margin:3px 0 0}
+  .bk .amt{font-size:12px;color:var(--text-secondary);text-align:right;white-space:nowrap}
+  .bk .ctl{display:flex;align-items:center;gap:10px;margin-top:9px}
+  .rk{font-size:10px;padding:2px 7px;border-radius:var(--radius);font-weight:500}
+  .gl{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+  .gl label{display:block;font-size:13px;font-weight:500;margin:0 0 3px}
+  .gl .hlp{font-size:11px;color:var(--text-muted);margin:4px 0 0;line-height:1.4}
+  .pbtn{font-size:12px;padding:6px 12px}
+  .sbtn{font-size:13px;padding:9px 12px;text-align:left;line-height:1.4;font-weight:500}
+  .sbtn span{font-size:11px;color:var(--text-muted);font-weight:400}
+  .sbtn.on{border:2px solid var(--border-accent);background:var(--bg-accent);color:var(--text-accent)}
+  .sbtn.on span{color:var(--text-accent)}
+  .retw{display:flex;align-items:center;gap:3px;font-size:12px;color:var(--text-secondary)}
+  .retw input{width:54px}
+  .seg{font-size:13px;font-weight:500;margin:0 0 7px}
+  .seg small{font-weight:400;color:var(--text-muted)}
+  .note{font-size:11px;color:var(--text-muted);margin-top:1.5rem;line-height:1.5}
+</style>
+</head>
+<body>
+<h1>Retirement income planner</h1>
+<p class="intro">Set how careful to be, choose where the money goes, and read a plain-English summary of how much you can safely spend and whether your savings last. Built for a 73-year-old in Botswana; rates reflect mid-2026. Educational only, not financial advice.</p>
+
+<p class="seg">1. How careful do you want to be with the savings? <small>— this sets how much you can safely take</small></p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:1.25rem">
+  <button class="sbtn on" data-strat="real">Protect its value<br><span>savings keep the same buying power · lowest income</span></button>
+  <button class="sbtn" data-strat="nominal">Keep the cash amount<br><span>the pula total never drops · more income</span></button>
+  <button class="sbtn" data-strat="free">Just spend what I need<br><span>take the full amount · may run out</span></button>
+</div>
+
+<p class="seg">2. Where is the money invested? <small>— drag a slider to move money; safe on top, riskier below</small></p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.9rem">
+  <span style="font-size:12px;color:var(--text-secondary);align-self:center">Quick mixes:</span>
+  <button class="pbtn" data-preset="stable">Safest</button>
+  <button class="pbtn" data-preset="balanced">Balanced</button>
+  <button class="pbtn" data-preset="growth">More growth</button>
+</div>
+<div id="buckets"></div>
+
+<p class="seg" style="margin-top:1.25rem">3. Your numbers <small>— change anything to see the effect</small></p>
+<div style="background:var(--surface-1);border-radius:12px;padding:1rem;margin:0 0 1.25rem">
+  <div class="gl">
+    <div><label for="cap">Savings to invest</label><input type="number" id="cap" value="1360000" step="10000"><p class="hlp">The cash you can put to work (BWP). About USD 100k.</p></div>
+    <div><label for="need">Monthly spending goal</label><input type="number" id="need" value="18000" step="500"><p class="hlp">What you'd like to live on each month.</p></div>
+    <div><label for="rent">Rent income</label><input type="number" id="rent" value="6000" step="250"><p class="hlp">Rent the property earns each month.</p></div>
+    <div><label for="infl">Inflation</label><input type="number" id="infl" value="8" step="0.5"><p class="hlp">How fast prices rise per year (%). Higher means money buys less.</p></div>
+    <div><label for="rg">Rent increase</label><input type="number" id="rg" value="4" step="0.5"><p class="hlp">How much the rent goes up per year (%).</p></div>
+    <div><label for="hz">Years to plan</label><input type="number" id="hz" value="20" step="1" min="5" max="35"><p class="hlp">How far ahead to look. 20 years reaches age 93.</p></div>
+  </div>
+</div>
+
+<p class="seg">What this gives you</p>
+<div class="hero" id="hero">—</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:1.25rem">
+  <div class="mc"><p class="lab">Safe to spend / month</p><div class="val" id="m_inc">—</div><div class="sub" id="m_inc_s"></div></div>
+  <div class="mc"><p class="lab">Covers your goal?</p><div class="val" id="m_gap" style="font-size:17px">—</div><div class="sub" id="m_gap_s"></div></div>
+  <div class="mc"><p class="lab">Average return</p><div class="val" id="m_ret">—</div><div class="sub" id="m_ret_s"></div></div>
+  <div class="mc"><p class="lab">Risk level</p><div class="val" id="m_risk" style="font-size:17px">—</div><div class="sub" id="m_risk_s"></div></div>
+</div>
+
+<p class="seg">Your savings over time</p>
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px;font-size:12px;color:var(--text-secondary)">
+  <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:3px;background:#2a78d6"></span>Actual pula</span>
+  <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:3px;background:#1baf7a"></span>In today's money</span>
+  <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:0;border-top:2px dashed #888780"></span>Where you started</span>
+</div>
+<div style="position:relative;width:100%;height:260px"><canvas id="chart" role="img" aria-label="Your savings over time, shown as actual pula and in today's money, against the starting amount"></canvas></div>
+<p id="chartmsg" style="font-size:12px;color:var(--text-muted);display:none">Chart could not load (offline). The numbers above still update.</p>
+<p style="font-size:12px;color:var(--text-muted);margin-top:8px;line-height:1.5">If the green line stays flat or rises, your savings keep their real value. If it drops below the dashed line, they're losing buying power.</p>
+
+<p class="note"><strong>The three careful settings:</strong> "Protect its value" reinvests enough each year to keep up with inflation and spends only the surplus — savings hold their buying power, income is lowest. "Keep the cash amount" spends all income but never the principal — the pula total stays flat, real value slips. "Just spend what I need" takes the full goal and may use up savings. Rates reflect mid-2026 Botswana (policy rate 5.5%, inflation ~8%, USD/BWP ~13.6). Not financial advice — review any plan with a fee-only advisor.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
+<script>
+(function(){
+  var B=[
+    {nm:'Cash / call account',risk:1,vol:0,a:10,r:3,desc:'Bank money you can take out anytime. Safest, lowest return.'},
+    {nm:'Fixed deposits (12-mo)',risk:1,vol:1,a:25,r:5.5,desc:'Locked in for a year at a set rate. Very safe.'},
+    {nm:'Govt bonds / T-bills',risk:2,vol:4,a:35,r:8.5,desc:'Lending to the government. Safe, pays more than deposits.'},
+    {nm:'USD / offshore',risk:2,vol:8,a:20,r:9,desc:'Held in US dollars. Guards against a weaker pula.'},
+    {nm:'BSE dividend shares',risk:4,vol:18,a:10,r:9,desc:'Company shares. Highest growth, but can drop in value.'}
+  ];
+  var presets={stable:[15,30,35,15,5],balanced:[10,25,35,20,10],growth:[5,15,30,20,30]};
+  var strat='real';
+  var rkLab=function(s){return s<1.5?['Very safe','#1D9E75']:s<2.4?['Safe','#639922']:s<3.3?['Medium','#BA7517']:['Higher','#D85A30'];};
+  var fmt=function(n){return new Intl.NumberFormat('en-US',{maximumFractionDigits:0}).format(Math.round(n));};
+  var host=document.getElementById('buckets');
+  B.forEach(function(b,i){
+    var rl=b.risk<=1?['Low risk','#E1F5EE','#0F6E56']:b.risk<=2?['Low–mod','#E6F1FB','#185FA5']:['Higher risk','#FAECE7','#993C1D'];
+    var d=document.createElement('div');d.className='bk';
+    d.innerHTML='<div class="top"><span class="nm">'+b.nm+' <span class="rk" style="background:'+rl[1]+';color:'+rl[2]+'">'+rl[0]+'</span></span><span class="amt" id="amt'+i+'"></span></div><p class="desc">'+b.desc+'</p><div class="ctl"><input type="range" min="0" max="100" step="1" value="'+b.a+'" class="alloc" data-i="'+i+'" style="flex:1" aria-label="'+b.nm+'"><span class="retw">grows <input type="number" class="ret" data-i="'+i+'" value="'+b.r+'" step="0.25" aria-label="'+b.nm+' return">%/yr</span></div>';
+    host.appendChild(d);
+  });
+  var chart=null;
+  function recalc(){
+    var allocs=[].map.call(document.querySelectorAll('.alloc'),function(e){return +e.value;});
+    var rets=[].map.call(document.querySelectorAll('.ret'),function(e){return +e.value;});
+    var sum=allocs.reduce(function(x,y){return x+y;},0)||1;
+    var cap=+document.getElementById('cap').value,need=+document.getElementById('need').value,rent=+document.getElementById('rent').value;
+    var infl=+document.getElementById('infl').value,rg=+document.getElementById('rg').value,H=Math.max(5,Math.min(35,+document.getElementById('hz').value));
+    var blended=0,risk=0,vol=0;
+    allocs.forEach(function(a,i){var w=a/sum;blended+=w*rets[i];risk+=w*B[i].risk;vol+=w*B[i].vol;document.getElementById('amt'+i).textContent='BWP '+fmt(cap*w)+' · '+Math.round(w*100)+'%';});
+    var realRet=blended-infl;
+    var P=cap,rentY=rent*12,needY=need*12,dep=0,nom=[cap],real=[cap],base=[cap],labels=['Now'],firstW=0;
+    for(var y=1;y<=H;y++){
+      var ret=P*blended/100, avail;
+      if(strat==='real') avail=ret+rentY-P*infl/100;
+      else if(strat==='nominal') avail=ret+rentY;
+      else avail=needY;
+      var W=(strat==='free')?needY:Math.min(needY,Math.max(0,avail));
+      if(y===1) firstW=W;
+      P=P+ret+rentY-W;
+      if(P<0){P=0;if(!dep)dep=y;}
+      rentY*=(1+rg/100); needY*=(1+infl/100);
+      nom.push(Math.round(P)); real.push(Math.round(P/Math.pow(1+infl/100,y))); base.push(cap); labels.push('Age '+(73+y));
+    }
+    var monthlyInc=firstW/12, gap=monthlyInc-need, age=73+H, covered=gap>=-1;
+    document.getElementById('m_inc').textContent='BWP '+fmt(monthlyInc);
+    document.getElementById('m_inc_s').textContent='your rent is already counted';
+    var gapEl=document.getElementById('m_gap');
+    gapEl.textContent=covered?'Yes':'No, −BWP '+fmt(Math.abs(gap));gapEl.style.color=covered?'#0F6E56':'#A32D2D';
+    document.getElementById('m_gap_s').textContent=covered?'meets your BWP '+fmt(need)+' goal':'short of BWP '+fmt(need)+'/mo';
+    document.getElementById('m_ret').textContent=blended.toFixed(1)+'%';
+    document.getElementById('m_ret_s').textContent=(realRet>=0?'beats':'trails')+' inflation by '+Math.abs(realRet).toFixed(1)+'%';
+    var rl=rkLab(risk);document.getElementById('m_risk').textContent=rl[0];document.getElementById('m_risk').style.color=rl[1];
+    document.getElementById('m_risk_s').textContent='could dip ~'+vol.toFixed(0)+'% in a bad year';
+    var statusP;
+    if(dep) statusP="they run out at age "+(73+dep);
+    else if(real[H]>=cap*0.97) statusP="holding their value";
+    else if(nom[H]>=cap*0.99) statusP="the same pula amount, but worth less as prices rise";
+    else statusP="gradually shrinking";
+    document.getElementById('hero').innerHTML=
+      "You can safely spend about <b>BWP "+fmt(monthlyInc)+" a month</b>. "+
+      (covered?"That meets your BWP "+fmt(need)+" goal":"That's <b>BWP "+fmt(Math.abs(gap))+"</b> short of your BWP "+fmt(need)+" goal")+". "+
+      "By age "+age+", your savings are worth about <b>BWP "+fmt(real[H])+"</b> in today's money — "+statusP+".";
+    if(typeof Chart==='undefined'){document.getElementById('chartmsg').style.display='block';return;}
+    var ds=[
+      {label:'Actual pula',data:nom,borderColor:'#2a78d6',backgroundColor:'rgba(42,120,214,.07)',borderWidth:2,fill:true,tension:.25,pointRadius:0},
+      {label:"Today's money",data:real,borderColor:'#1baf7a',borderWidth:2,fill:false,tension:.25,pointRadius:0},
+      {label:'Where you started',data:base,borderColor:'#888780',borderWidth:1.5,borderDash:[6,5],fill:false,pointRadius:0}
+    ];
+    if(chart){chart.data.labels=labels;chart.data.datasets[0].data=nom;chart.data.datasets[1].data=real;chart.data.datasets[2].data=base;chart.update();}
+    else{chart=new Chart(document.getElementById('chart'),{type:'line',data:{labels:labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:{duration:500},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.dataset.label+': BWP '+fmt(c.parsed.y);}}}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return (v/1000000).toFixed(1)+'M';},color:'#898781'},grid:{color:'rgba(137,135,129,.18)'}},x:{ticks:{color:'#898781',maxRotation:0,autoSkip:true,maxTicksLimit:7},grid:{display:false}}}}});}
+  }
+  document.querySelectorAll('input').forEach(function(e){e.addEventListener('input',recalc);});
+  document.querySelectorAll('[data-preset]').forEach(function(btn){btn.addEventListener('click',function(){var p=presets[btn.dataset.preset];document.querySelectorAll('.alloc').forEach(function(e,i){e.value=p[i];});recalc();});});
+  document.querySelectorAll('[data-strat]').forEach(function(btn){btn.addEventListener('click',function(){strat=btn.dataset.strat;document.querySelectorAll('[data-strat]').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');recalc();});});
+  window.addEventListener('load',recalc);
+  recalc();
+})();
+</script>
+</body>
+</html>
