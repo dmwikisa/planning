@@ -17,11 +17,11 @@
   @media (prefers-color-scheme:dark){:root{--surface-2:#262624;--surface-1:#242422;--surface-0:#1a1a19;--text-primary:#f3f2ea;--text-secondary:#c3c2b7;--text-muted:#898781;--border:rgba(255,255,255,.14);--bg-accent:#0C447C;--text-accent:#B5D4F4;--border-accent:#378ADD}}
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--surface-0);color:var(--text-primary);max-width:720px;margin:0 auto;padding:1.5rem 1.25rem calc(2rem + env(safe-area-inset-bottom));line-height:1.6}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--surface-0);color:var(--text-primary);max-width:720px;margin:0 auto;padding:1.5rem 1.25rem calc(2rem + env(safe-area-inset-bottom));line-height:1.6;overflow-x:hidden}
   h1{font-size:23px;font-weight:500;margin:0 0 4px}
   .intro{font-size:13px;color:var(--text-secondary);margin:0 0 1.5rem}
-  input{font:inherit;color:var(--text-primary);background:var(--surface-2);border:.5px solid var(--border);border-radius:var(--radius);padding:6px 8px;width:100%}
-  input[type=range]{padding:0;accent-color:#2a78d6;width:auto}
+  input{font:inherit;font-size:16px;color:var(--text-primary);background:var(--surface-2);border:.5px solid var(--border);border-radius:var(--radius);padding:8px 9px;width:100%}
+  input[type=range]{padding:0;accent-color:#2a78d6;width:auto;height:28px}
   button{font:inherit;background:var(--surface-2);border:.5px solid var(--text-muted);border-radius:var(--radius);color:var(--text-primary);cursor:pointer;-webkit-tap-highlight-color:transparent}
   button:hover{background:var(--surface-1)}
   .hero{background:var(--bg-accent);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.25rem;font-size:15px;line-height:1.6;color:var(--text-accent)}
@@ -35,7 +35,7 @@
   .bk .nm{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:500}
   .bk .desc{font-size:12px;color:var(--text-secondary);margin:3px 0 0}
   .bk .amt{font-size:12px;color:var(--text-secondary);text-align:right;white-space:nowrap}
-  .bk .ctl{display:flex;align-items:center;gap:10px;margin-top:9px}
+  .bk .ctl{display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap}
   .rk{font-size:10px;padding:2px 7px;border-radius:var(--radius);font-weight:500}
   .gl{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
   .gl label{display:block;font-size:13px;font-weight:500;margin:0 0 3px}
@@ -50,6 +50,14 @@
   .seg{font-size:13px;font-weight:500;margin:0 0 7px}
   .seg small{font-weight:400;color:var(--text-muted)}
   .note{font-size:11px;color:var(--text-muted);margin-top:1.5rem;line-height:1.5}
+  @media(max-width:480px){
+    body{padding:1.1rem .9rem calc(1.5rem + env(safe-area-inset-bottom))}
+    h1{font-size:20px}
+    .hero{font-size:14px;padding:.9rem 1rem}
+    .gl{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .retw{margin-left:auto}
+    .bk .ctl input[type=range]{flex:1 1 100%}
+  }
 </style>
 </head>
 <body>
@@ -176,7 +184,7 @@
       {label:'Where you started',data:base,borderColor:'#888780',borderWidth:1.5,borderDash:[6,5],fill:false,pointRadius:0}
     ];
     if(chart){chart.data.labels=labels;chart.data.datasets[0].data=nom;chart.data.datasets[1].data=real;chart.data.datasets[2].data=base;chart.update();}
-    else{chart=new Chart(document.getElementById('chart'),{type:'line',data:{labels:labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:{duration:500},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.dataset.label+': BWP '+fmt(c.parsed.y);}}}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return (v/1000000).toFixed(1)+'M';},color:'#898781'},grid:{color:'rgba(137,135,129,.18)'}},x:{ticks:{color:'#898781',maxRotation:0,autoSkip:true,maxTicksLimit:7},grid:{display:false}}}}});}
+    else{chart=new Chart(document.getElementById('chart'),{type:'line',data:{labels:labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:{duration:350},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.dataset.label+': BWP '+fmt(c.parsed.y);}}}},scales:{y:{beginAtZero:true,ticks:{callback:function(v){return (v/1000000).toFixed(1)+'M';},color:'#898781'},grid:{color:'rgba(137,135,129,.18)'}},x:{ticks:{color:'#898781',maxRotation:0,autoSkip:true,maxTicksLimit:7},grid:{display:false}}}}});}
   }
   document.querySelectorAll('input').forEach(function(e){e.addEventListener('input',recalc);});
   document.querySelectorAll('[data-preset]').forEach(function(btn){btn.addEventListener('click',function(){var p=presets[btn.dataset.preset];document.querySelectorAll('.alloc').forEach(function(e,i){e.value=p[i];});recalc();});});
